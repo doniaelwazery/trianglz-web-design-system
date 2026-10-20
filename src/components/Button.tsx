@@ -103,7 +103,8 @@ export function Button({
   const current = disabled ? 'disabled' : state ?? 'default';
   const look = variant === 'outline' ? outline : variant === 'link' ? link : filled[color];
   const iconName = iconPosition === 'none' ? null : icon ?? defaultIcon[iconPosition];
-  const iconEl = iconName && <Icon name={iconName} className="size-4.5" />;
+  // Figma: 12px icon on xs buttons, 18px on base (other sizes follow base until Figma says otherwise)
+  const iconEl = iconName && <Icon name={iconName} className={size === 'xs' ? 'size-3' : 'size-4.5'} />;
 
   return (
     <button

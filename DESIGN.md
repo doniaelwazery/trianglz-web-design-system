@@ -43,6 +43,7 @@ Note: `rounded-sm` is **2px** here (Tailwind's default is 4px). Use `rounded-bas
 ## 3. Platform rules (Web / Tailwind v4)
 
 - Use theme utilities only. **No arbitrary values**: no `bg-[#2563eb]`, `p-[13px]`, `text-[15px]`, `rounded-[10px]`.
+- Tailwind's own palette is removed, so `white`, `black` and `red-500` don't exist. Use semantic tokens, or the primitives `base-white` / `base-black` when a fixed color is really meant (e.g. text on a dark brand surface).
 - If a value you need has no token, stop and ask the designer. Don't approximate with an arbitrary value.
 - Pair font size with its line height: `text-sm leading-sm`, `text-base leading-base`.
 - Use state variants for interaction: `hover:`, `focus-visible:`, `active:`, `disabled:`. Don't fake states with JS-toggled classes.

@@ -184,3 +184,7 @@ Screen: "add New Project" — https://www.figma.com/design/G8OLBUp6OrEyrMBkqNUwQ
   - Input / Text has no `helpIcon` boolean (Textarea/Upload Field have one)
   - Input / Text icon slot is a fixed chevron, not swappable (needed for the Timeline calendar icon / date input)
   - Missing: chevron-down icon, notification bell with dot, image/logo uploader with preview, page header, top bar, sidebar navigation item, "New" tag
+- Code build: `src/screens/add-project/` (`npm run dev` → http://localhost:5173/#add-project). Page content uses only Trianglz components + tokens (0 arbitrary values); ensido chrome isolated in AppShell.tsx with its Figma assets
+- Measured vs Figma: card 24/16/8, fields 68 tall, title 36 lh, back link 136×32, Save 59×36 match; Cancel +5px, Description −2px
+- Fixed during test: xs Button icons 12px (Figma), `white` → `base-white` (Tailwind palette removed; added to DESIGN.md)
+- Open: Logo still ensido in Figma (Upload Field not in library); Page Title color is ensido #171717; xs text style has 0.2px tracking with no token
