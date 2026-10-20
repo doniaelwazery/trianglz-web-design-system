@@ -4,7 +4,7 @@
 - **Platform:** Web
 - **Framework:** Tailwind CSS v4 (`@theme` in CSS)
 - **File:** duplicate (safe to edit)
-- **Codebase:** not yet. Steps 3, 4, 6 wait until one exists
+- **Codebase:** this repo (https://github.com/doniaelwazery/trianglz-web-design-system), tokens only; no UI components yet
 - **Steps chosen:** all 6
 - **Started:** 2026-10-20
 
@@ -24,9 +24,9 @@
 |---|------|--------|
 | 1 | Tokens machine-readable | done 2026-10-20 |
 | 2 | Components code-shaped | done 2026-10-20 |
-| 3 | Export tokens | waiting on codebase |
+| 3 | Export tokens | done 2026-10-20 |
 | 4 | Code Connect | waiting on codebase |
-| 5 | DESIGN.md | done 2026-10-20 (7 confirm items open) |
+| 5 | DESIGN.md | done 2026-10-20 (4 confirm items open) |
 | 6 | Test + sync | waiting on codebase |
 
 ## Step 1 — Tokens (done 2026-10-20)
@@ -146,3 +146,12 @@ Descriptions: 3 / 28 sets. Broken sets: 0.
 - Wrote `DESIGN.md` (principles, token classes, web rules, layout, 16 components + icons, accessibility, top 10) and `CLAUDE.md` (3 hard rules) at the project root
 - Principles chosen: Clarity over decoration · One primary action per view · Consistent states everywhere · Accessible by default
 - Open `<!-- confirm -->` items: file paths (Step 3), dark-mode selector, iPad/Mobile breakpoints, layout grid specs, Button `color` prop, 24px target + rem output, button text contrast
+
+## Step 3 — Token export (done 2026-10-20)
+- Decisions: dark mode `[data-theme="dark"]`; Mobile < 768px, iPad 768–1279px, Desktop ≥ 1280px; Tailwind's default palette removed (`--color-*: initial`)
+- `tokens/tokens.json` (223 variables, DTCG, aliases + all modes in `$extensions.com.figma.modes`, Figma code syntax kept per token) and `tokens/effects.json` (11 shadows)
+- `npm run tokens:build` → Style Dictionary 5.7 (`build/tokens.mjs`) writes `src/styles/theme.css`; `build/verify.mjs` compiles a test page with Tailwind 4.3.3 and checks every token
+- Output: sizes in rem (16px base), letter spacing in px, weights 300–700, `--text-*--line-height` paired to `--leading-*`, `--breakpoint-ipad` / `--breakpoint-desktop` added
+- Verified: 235/235 Figma code syntax names exist in theme.css and generate the right Tailwind class (incl. `text-primary`, `bg-btn-primary`, `border-default`, `gap-2.5`, `hover:bg-btn-primary-hover`); Dark/iPad/Mobile blocks present; a deliberately wrong name is caught
+- Not exported: the 40 Figma text styles (they're combinations of these tokens); could become `@utility` classes later
+- Steps 4 and 6 still need UI components in code

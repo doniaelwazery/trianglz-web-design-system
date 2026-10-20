@@ -13,7 +13,7 @@ Platform: Web · Tailwind CSS v4.
 
 ## 2. Tokens
 
-- Tokens come from Figma variables. In code they live in `tokens/tokens.json` and the generated Tailwind theme (`src/styles/theme.css`). <!-- confirm: paths are created in Step 3 -->
+- Tokens come from Figma variables. In code they live in `tokens/tokens.json` (+ `tokens/effects.json` for shadows) and the generated Tailwind theme `src/styles/theme.css`. Regenerate with `npm run tokens:build`; never edit `theme.css` by hand.
 - Never copy raw values (hex, px) into components. Use the Tailwind class the token creates.
 - Components use **semantic** tokens only. Primitives (`--color-blue-500`, `--color-gray-700`…) exist for the theme file, not for components.
 - Light and Dark are modes of the same tokens: the class names never change per theme.
@@ -31,7 +31,7 @@ Platform: Web · Tailwind CSS v4.
 | State borders | `border-focus` `border-error` `border-success` `border-warning` |
 | Buttons (per type: primary, secondary, info, danger, success, warning) | `bg-btn-{type}` `hover:bg-btn-{type}-hover` `active:bg-btn-{type}-active` `text-btn-{type}` `border-btn-{type}` `bg-btn-{type}-light` |
 | Neutral (ghost) button | `text-btn-neutral` `hover:bg-btn-neutral-hover` `active:bg-btn-neutral-active` |
-| Font | `font-sans` (Poppins) · `font-light` `font-normal` `font-medium` `font-semibold` `font-bold` (300–700) |
+| Font | `font-sans` (Poppins) · `font-light` `font-regular` `font-medium` `font-semibold` `font-bold` (300–700) |
 | Font size + line height | `text-xs … text-6xl` with matching `leading-xs … leading-6xl` |
 | Letter spacing | `tracking-tighter` `tracking-tight` `tracking-normal` `tracking-wide` `tracking-wider` `tracking-widest` |
 | Spacing (4px steps) | `p-*` `m-*` `gap-*` with `0 1 1.5 2 2.5 3 … 64` |
@@ -46,13 +46,13 @@ Note: `rounded-sm` is **2px** here (Tailwind's default is 4px). Use `rounded-bas
 - If a value you need has no token, stop and ask the designer. Don't approximate with an arbitrary value.
 - Pair font size with its line height: `text-sm leading-sm`, `text-base leading-base`.
 - Use state variants for interaction: `hover:`, `focus-visible:`, `active:`, `disabled:`. Don't fake states with JS-toggled classes.
-- Dark mode: switch the theme on a root attribute; never write per-component dark overrides. <!-- confirm: [data-theme="dark"] or .dark -->
+- Dark mode: set `data-theme="dark"` on `<html>`; never write per-component dark overrides or use Tailwind's `dark:` variant for token colors.
 - Icons: inline SVG or an `Icon` component with `fill="currentColor"` / `stroke="currentColor"`, sized 24px, colored with `text-*`.
 
 ## 4. Layout & spacing
 
 - Spacing follows a 4px scale (`1` = 4px). Half steps `1.5` (6px) and `2.5` (10px) exist for tight component internals; don't use them for page layout.
-- Spacing and type tokens have **Desktop / iPad / Mobile** values: the same class gets smaller on small screens. Don't add your own responsive overrides for spacing or font size. <!-- confirm: breakpoint widths for iPad and Mobile -->
+- Spacing and type tokens have **Desktop / iPad / Mobile** values: the same class gets smaller on small screens. Don't add your own responsive overrides for spacing or font size. Mobile is below 768px, iPad 768–1279px, Desktop from 1280px (`ipad:` and `desktop:` variants exist for layout changes).
 - Use the layout grid from the Figma "Layout Grid" page for page columns and gutters. <!-- confirm: columns, gutter, max width -->
 - Use flex/grid with `gap-*` between siblings rather than margins on children.
 
@@ -130,7 +130,7 @@ Reuse these before building anything new. Prop names match Figma.
 - Every interactive element shows a visible focus state (`focus-visible:` with `border-focus` or a ring). Never remove outlines without a replacement.
 - Click targets are at least 24×24px (WCAG 2.2 AA); icon-only buttons use `size` sm or larger. <!-- confirm -->
 - Forms: real `<label>` for every field; errors are announced (`aria-describedby` on the field pointing at the message).
-- Respect user font scaling: sizes in `rem` (the token build outputs rem). <!-- confirm in Step 3 -->
+- Respect user font scaling: font sizes, line heights, spacing and radius are output in `rem` (16px base).
 - Don't rely on color alone: status components pair color with an icon and text.
 
 ## 7. Do / Don't (top 10)
