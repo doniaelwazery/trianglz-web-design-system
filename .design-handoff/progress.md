@@ -25,7 +25,7 @@
 | 1 | Tokens machine-readable | done 2026-10-20 |
 | 2 | Components code-shaped | done 2026-10-20 |
 | 3 | Export tokens | done 2026-10-20 |
-| 4 | Code Connect | blocked: needs Figma Organization/Enterprise plan |
+| 4 | Code Connect | templates done 2026-10-20; publishing blocked by plan |
 | 5 | DESIGN.md | done 2026-10-20 (4 confirm items open) |
 | 6 | Test + sync | done 2026-10-20 (Logo swap pending Upload Field publish) |
 
@@ -191,3 +191,11 @@ Screen: "add New Project" — https://www.figma.com/design/G8OLBUp6OrEyrMBkqNUwQ
 
 ## Sync routine (approved 2026-10-20)
 Saved in DESIGN.md section 8: variable change → code syntax + tokens.json + `npm run tokens:build` + PR; component change → React component (same props) + gallery + DESIGN.md + publish library + PR; rule change → DESIGN.md PR reviewed by designer; release → tokens:build, tsc, build pass + gallery check in Light/Dark.
+
+## Step 4 — Code Connect (2026-10-20)
+- 59 parserless templates in `src/figma/` (21 components + 38 icons), type-checked with `@figma/code-connect` 2.0.2; config in `figma.config.json` (label React)
+- Mapping: Figma variant/boolean/text props → React props with the same names; state=disabled → `disabled`, hover/focus omitted (browser); Button reads its nested icon's name from the icon template's metadata; text layers → labels/children
+- Code change: Avatar got an `initials` prop (Figma shows initials as text)
+- Test publish of Button + icon: refused by Figma — "Code connections can only be made in libraries that are in Organization or Enterprise plans" (plans: Starter ×2, Pro guest)
+- To publish after upgrading: move the library to an Organization/Enterprise team, then `npx figma connect publish --token=<personal access token>` (or ask Claude to publish via the Figma MCP)
+- Not mapped (no code prop): helpIcon booleans (code needs help text), NumericField state, Search/Code Field hover/focus/filled visuals

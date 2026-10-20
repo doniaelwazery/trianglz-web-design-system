@@ -12,6 +12,8 @@ export interface AvatarProps {
   src?: string;
   /** Person's name: alt text for the photo and source of the initials. */
   name?: string;
+  /** Initials to show instead of deriving them from `name` (Figma shows them as text, e.g. "AK"). */
+  initials?: string;
   className?: string;
 }
 
@@ -31,18 +33,18 @@ const initials = (name: string) =>
     .join('');
 
 /** A person, shown as photo → initials → icon (in that order of preference). */
-export function Avatar({ variant, size = 'base', src, name, className }: AvatarProps) {
-  const kind = variant ?? (src ? 'photo' : name ? 'text' : 'icon');
+export function Avatar({ variant, size = 'base', src, name, initials: fixedInitials, className }: AvatarProps) {
+  const kind = variant ?? (src ? 'photo' : name || fixedInitials ? 'text' : 'icon');
   const s = sizes[size];
   const frame = cn('inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-(--background-color-btn-neutral-active)', s.box, className);
 
   if (kind === 'photo' && src) {
     return <img src={src} alt={name ?? ''} className={cn(frame, 'object-cover outline -outline-offset-1 outline-(--border-color-strong)')} />;
   }
-  if (kind === 'text' && name) {
+  if (kind === 'text' && (name || fixedInitials)) {
     return (
-      <span role="img" aria-label={name} className={cn(frame, s.text, 'text-secondary')}>
-        {initials(name)}
+      <span role="img" aria-label={name ?? fixedInitials} className={cn(frame, s.text, 'text-secondary')}>
+        {fixedInitials ?? initials(name!)}
       </span>
     );
   }

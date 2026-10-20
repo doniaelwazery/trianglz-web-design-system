@@ -155,7 +155,7 @@ Reuse these before building anything new. They live in `src/components` (`import
 | Change in Figma | What to do |
 |---|---|
 | Variable (color, spacing, type) | Set its WEB code syntax (Tailwind namespace), update `tokens/tokens.json`, run `npm run tokens:build` (must pass), PR listing affected components |
-| Component (new, renamed prop, new variant) | Update the React component with the same prop names, add it to the gallery and to section 5, publish the Figma library, PR |
+| Component (new, renamed prop, new variant) | Update the React component with the same prop names, add it to the gallery and to section 5, update its template in `src/figma/`, publish the Figma library, PR |
 | Rule (usage, accessibility) | PR to this file, reviewed by the designer |
 | Before a release | `npm run tokens:build`, `npx tsc`, `npx vite build` pass; check the gallery in Light and Dark |
 

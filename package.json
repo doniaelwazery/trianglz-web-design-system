@@ -11,6 +11,7 @@
     "tokens:build": "node build/tokens.mjs && node build/verify.mjs"
   },
   "devDependencies": {
+    "@figma/code-connect": "2.0.2",
     "@tailwindcss/cli": "4.3.3",
     "@tailwindcss/vite": "4.3.3",
     "@types/react": "19.3.0",
