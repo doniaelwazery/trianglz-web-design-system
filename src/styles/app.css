@@ -1,0 +1,11 @@
+/* App entry: the generated token theme plus base element styles. */
+@import "./theme.css";
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+  body {
+    @apply bg-primary text-primary;
+  }
+}

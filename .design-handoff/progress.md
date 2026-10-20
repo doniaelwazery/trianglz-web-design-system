@@ -4,7 +4,7 @@
 - **Platform:** Web
 - **Framework:** Tailwind CSS v4 (`@theme` in CSS)
 - **File:** duplicate (safe to edit)
-- **Codebase:** this repo (https://github.com/doniaelwazery/trianglz-web-design-system), tokens only; no UI components yet
+- **Codebase:** this repo (https://github.com/doniaelwazery/trianglz-web-design-system): tokens + React/Tailwind components
 - **Steps chosen:** all 6
 - **Started:** 2026-10-20
 
@@ -155,3 +155,17 @@ Descriptions: 3 / 28 sets. Broken sets: 0.
 - Verified: 235/235 Figma code syntax names exist in theme.css and generate the right Tailwind class (incl. `text-primary`, `bg-btn-primary`, `border-default`, `gap-2.5`, `hover:bg-btn-primary-hover`); Dark/iPad/Mobile blocks present; a deliberately wrong name is caught
 - Not exported: the 40 Figma text styles (they're combinations of these tokens); could become `@utility` classes later
 - Steps 4 and 6 still need UI components in code
+
+## Components in code (2026-10-20)
+- React 19 + TypeScript + Vite 8 + Tailwind 4.3; `src/components` (16 Figma components + Pagination/Tabs bars + Icon), gallery at `npm run dev`
+- Specs read from Figma (default variant + per-variant diffs) in 3 calls; 45 SVG icons exported (38 Icons page + 7 drawn inside components). `export` icon has no visible layers → not exported
+- Prop names follow Figma (variant, size, iconPosition, state, checked, label/labelText, hint, optional, errorMessage…); `state` prop only forces visuals for docs
+- Measured vs Figma: Button all sizes and icon positions, Input/Search/Upload fields, Code Field, Numeric Field, Toggle, Checkbox, Avatars, Badges, Popup 443×276, Pagination, Tabs match within 1–2px (text rendering)
+- Known differences / designer items:
+  - Alert is 56px tall vs 60 in Figma (Figma text styles use 22px line height; tokens give 20)
+  - Popup frame, avatar circles and some paddings are bound to variables that no longer exist in the file (shown as `$undefined`/`$?`) → used bg-primary, border-default, rounded-lg/full, p-10
+  - Warning/success titles and icons use `btn/*/bg` fill tokens as text color (no text token exists)
+  - Dark mode: `btn/primary/text` is gray-900, so filled warning/danger buttons get dark text on red/yellow (low contrast)
+  - Fixed component sizes aren't tokens in Figma (spacing tokens shrink on mobile) → components use rem sizes; consider size tokens
+  - Button `color` prop added in code (Popup needs warning/danger buttons); Figma Button has no color variant
+  - Code Connect (Step 4) needs a Figma Organization/Enterprise plan; this file is on Starter

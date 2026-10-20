@@ -47,7 +47,10 @@ Note: `rounded-sm` is **2px** here (Tailwind's default is 4px). Use `rounded-bas
 - Pair font size with its line height: `text-sm leading-sm`, `text-base leading-base`.
 - Use state variants for interaction: `hover:`, `focus-visible:`, `active:`, `disabled:`. Don't fake states with JS-toggled classes.
 - Dark mode: set `data-theme="dark"` on `<html>`; never write per-component dark overrides or use Tailwind's `dark:` variant for token colors.
-- Icons: inline SVG or an `Icon` component with `fill="currentColor"` / `stroke="currentColor"`, sized 24px, colored with `text-*`.
+- Icons: use `<Icon name="…" />` from `src/components` (24px by default, colored with `text-*`).
+- Token colors on properties without their own namespace (outline, ring, inset-ring, fill, stroke) use the variable shorthand: `outline-(--border-color-focus)`, `inset-ring-(--border-color-default)`. That is a token, not an arbitrary value.
+- Figma inside strokes become `inset-ring` (the element keeps its size); outside strokes become `outline`.
+- Spacing keys that are tokens (`0 1 2 … 64`) shrink on iPad and Mobile; use them for padding, margins and gaps. Fixed component dimensions (control, avatar and icon sizes) have no Figma token: inside `src/components` they use rem values such as `size-[1.25rem]`. App code uses the components instead of repeating those sizes.
 
 ## 4. Layout & spacing
 
@@ -58,14 +61,14 @@ Note: `rounded-sm` is **2px** here (Tailwind's default is 4px). Use `rounded-bas
 
 ## 5. Components
 
-Reuse these before building anything new. Prop names match Figma.
+Reuse these before building anything new. They live in `src/components` (`import { Button, Input } from './components'`), and `npm run dev` opens a gallery of every variant and state. Prop names match Figma; a `state` prop forces a visual state for docs and review only, and product code leaves it unset.
 
 ### Button
 - **Use for** actions. **Props:** `variant` filled | outline | pill | link · `size` xs | sm | base | lg | xl · `iconPosition` none | left | right | only · `state` default | hover | focus | disabled.
 - **Do:** one `filled` button per view for the main action.
 - **Don't:** use a button to navigate between pages; use a link.
 - Icon-only buttons (`iconPosition=only`) need an `aria-label`.
-- Color types (primary, secondary, info, danger, success, warning, neutral) exist as tokens; the Figma Button shows primary only. <!-- confirm: should Button get a `color` prop? -->
+- `color` prop: primary | info | success | warning | danger, for `filled` and `pill`. Added in code because Confirmation Popup needs warning and danger buttons; the Figma Button shows primary only. <!-- confirm: add a color variant to the Figma Button? -->
 
 ### Input / Text, Input / URL, Input / Card number
 - **Use for** single-line data entry. **Props:** `state` default | hover | focus | filled | disabled | error · `optional`, `hint`, `errorMessage`, `icon`, `paymentIcon`, `prefix` (booleans).
