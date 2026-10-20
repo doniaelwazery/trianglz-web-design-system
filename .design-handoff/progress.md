@@ -174,3 +174,13 @@ Descriptions: 3 / 28 sets. Broken sets: 0.
 1. **Button color variant: yes.** Figma Button (103:859) got `color` = primary/danger/success/warning/info on `filled` (320 new variants → 640 total; existing = color=primary). Icons in colored variants follow the label token. Popup warning/danger buttons switched from fill overrides to the new variants.
 2. **Size tokens: no.** Components keep fixed rem sizes (documented in DESIGN.md).
 3. **Dark contrast fix: yes.** New tokens `color/btn/{danger,success,warning,info}/label` (danger white/white 4.83, success gray-900 6.10, warning gray-900 9.36, info white/gray-900 5.17/5.46). Used by Figma Button + code Button. tokens.json now 227 variables; token check 239/239.
+
+## Step 6 — Test screen (in progress, 2026-10-20)
+Screen: "add New Project" — https://www.figma.com/design/G8OLBUp6OrEyrMBkqNUwQL/Testing---Design-System-Handoff?node-id=2-570 (original frame edited in place, at the designer's request)
+- Swapped to Trianglz DS: Title + Timeline → Input / Text (help icon hidden), Description → Textarea, Cancel/Save → Button outline/filled sm, "Back to Projects" → Button link xs + chevron-left, header avatar → Avatar photo sm (photo kept)
+- Waiting: Logo picker → Upload Field (Upload Field still UNPUBLISHED in the library)
+- Kept from ensido (no Trianglz equivalent): Page Title container, Header (hamburger, notification bell + dot, profile dropdown chevron), Sidebar (nav items, sub-tab, "New" tag, organization card, nav icons)
+- Design system gaps found:
+  - Input / Text has no `helpIcon` boolean (Textarea/Upload Field have one)
+  - Input / Text icon slot is a fixed chevron, not swappable (needed for the Timeline calendar icon / date input)
+  - Missing: chevron-down icon, notification bell with dot, image/logo uploader with preview, page header, top bar, sidebar navigation item, "New" tag
