@@ -169,3 +169,8 @@ Descriptions: 3 / 28 sets. Broken sets: 0.
   - Fixed component sizes aren't tokens in Figma (spacing tokens shrink on mobile) → components use rem sizes; consider size tokens
   - Button `color` prop added in code (Popup needs warning/danger buttons); Figma Button has no color variant
   - Code Connect (Step 4) needs a Figma Organization/Enterprise plan; this file is on Starter
+
+## Design decisions (2026-10-20, after components)
+1. **Button color variant: yes.** Figma Button (103:859) got `color` = primary/danger/success/warning/info on `filled` (320 new variants → 640 total; existing = color=primary). Icons in colored variants follow the label token. Popup warning/danger buttons switched from fill overrides to the new variants.
+2. **Size tokens: no.** Components keep fixed rem sizes (documented in DESIGN.md).
+3. **Dark contrast fix: yes.** New tokens `color/btn/{danger,success,warning,info}/label` (danger white/white 4.83, success gray-900 6.10, warning gray-900 9.36, info white/gray-900 5.17/5.46). Used by Figma Button + code Button. tokens.json now 227 variables; token check 239/239.

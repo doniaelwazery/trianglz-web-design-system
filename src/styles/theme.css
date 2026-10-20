@@ -133,6 +133,7 @@
   --background-color-btn-info-hover: var(--color-blue-700);
   --background-color-btn-info-active: var(--color-blue-800);
   --background-color-btn-info-light: var(--color-blue-50);
+  --text-color-btn-info-label: var(--color-base-white);
   --background-color-btn-secondary: var(--color-base-white);
   --text-color-btn-secondary: var(--color-gray-700);
   --border-color-btn-secondary: var(--color-gray-300);
@@ -144,18 +145,21 @@
   --background-color-btn-danger-hover: var(--color-red-700);
   --background-color-btn-danger-active: var(--color-red-800);
   --background-color-btn-danger-light: var(--color-red-50);
+  --text-color-btn-danger-label: var(--color-base-white);
   --background-color-btn-success: var(--color-green-600);
   --text-color-btn-success: var(--color-green-900);
   --border-color-btn-success: var(--color-green-600);
   --background-color-btn-success-hover: var(--color-green-700);
   --background-color-btn-success-active: var(--color-green-800);
   --background-color-btn-success-light: var(--color-green-50);
+  --text-color-btn-success-label: var(--color-gray-900);
   --background-color-btn-warning: var(--color-yellow-500);
   --text-color-btn-warning: var(--color-yellow-900);
   --border-color-btn-warning: var(--color-yellow-500);
   --background-color-btn-warning-hover: var(--color-yellow-600);
   --background-color-btn-warning-active: var(--color-yellow-700);
   --background-color-btn-warning-light: var(--color-yellow-50);
+  --text-color-btn-warning-label: var(--color-gray-900);
   --text-color-btn-neutral: var(--color-gray-600);
   --background-color-btn-neutral-hover: var(--color-gray-100);
   --background-color-btn-neutral-active: var(--color-gray-200);
@@ -298,6 +302,7 @@
   --background-color-btn-info-hover: var(--color-blue-400);
   --background-color-btn-info-active: var(--color-blue-300);
   --background-color-btn-info-light: var(--color-blue-950);
+  --text-color-btn-info-label: var(--color-gray-900);
   --background-color-btn-secondary: var(--color-gray-800);
   --text-color-btn-secondary: var(--color-gray-200);
   --border-color-btn-secondary: var(--color-gray-600);

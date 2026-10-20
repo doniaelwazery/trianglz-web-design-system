@@ -68,7 +68,7 @@ Reuse these before building anything new. They live in `src/components` (`import
 - **Do:** one `filled` button per view for the main action.
 - **Don't:** use a button to navigate between pages; use a link.
 - Icon-only buttons (`iconPosition=only`) need an `aria-label`.
-- `color` prop: primary | info | success | warning | danger, for `filled` and `pill`. Added in code because Confirmation Popup needs warning and danger buttons; the Figma Button shows primary only. <!-- confirm: add a color variant to the Figma Button? -->
+- `color` prop: primary | info | success | warning | danger (Figma `color` variant on `filled`; code also allows it on `pill`). Text uses the matching label token (`text-btn-danger-label` …), chosen for AA contrast in both themes.
 
 ### Input / Text, Input / URL, Input / Card number
 - **Use for** single-line data entry. **Props:** `state` default | hover | focus | filled | disabled | error · `optional`, `hint`, `errorMessage`, `icon`, `paymentIcon`, `prefix` (booleans).

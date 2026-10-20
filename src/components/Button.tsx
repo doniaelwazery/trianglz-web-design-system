@@ -6,7 +6,7 @@ export type ButtonVariant = 'filled' | 'outline' | 'pill' | 'link';
 export type ButtonSize = 'xs' | 'sm' | 'base' | 'lg' | 'xl';
 export type ButtonIconPosition = 'none' | 'left' | 'right' | 'only';
 export type ButtonState = 'default' | 'hover' | 'focus' | 'disabled';
-/** Fill color for `filled` and `pill`. Figma only shows primary; the others exist as tokens and are used by Confirmation Popup. */
+/** Fill color for `filled` (Figma `color` variant). Code also applies it to `pill`. */
 export type ButtonColor = 'primary' | 'info' | 'success' | 'warning' | 'danger';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -37,25 +37,25 @@ const filled: Record<ButtonColor, Look> = {
     interactive: 'hover:bg-btn-primary-hover active:bg-btn-primary-active focus-visible:bg-btn-primary-active focus-visible:outline-3 focus-visible:outline-(--border-color-btn-primary)',
   },
   info: {
-    base: 'bg-btn-info text-btn-primary',
+    base: 'bg-btn-info text-btn-info-label',
     hover: 'bg-btn-info-hover',
     focus: 'bg-btn-info-active outline-3 outline-(--border-color-btn-info)',
     interactive: 'hover:bg-btn-info-hover active:bg-btn-info-active focus-visible:bg-btn-info-active focus-visible:outline-3 focus-visible:outline-(--border-color-btn-info)',
   },
   success: {
-    base: 'bg-btn-success text-btn-primary',
+    base: 'bg-btn-success text-btn-success-label',
     hover: 'bg-btn-success-hover',
     focus: 'bg-btn-success-active outline-3 outline-(--border-color-btn-success)',
     interactive: 'hover:bg-btn-success-hover active:bg-btn-success-active focus-visible:bg-btn-success-active focus-visible:outline-3 focus-visible:outline-(--border-color-btn-success)',
   },
   warning: {
-    base: 'bg-btn-warning text-btn-primary',
+    base: 'bg-btn-warning text-btn-warning-label',
     hover: 'bg-btn-warning-hover',
     focus: 'bg-btn-warning-active outline-3 outline-(--border-color-btn-warning)',
     interactive: 'hover:bg-btn-warning-hover active:bg-btn-warning-active focus-visible:bg-btn-warning-active focus-visible:outline-3 focus-visible:outline-(--border-color-btn-warning)',
   },
   danger: {
-    base: 'bg-btn-danger text-btn-primary',
+    base: 'bg-btn-danger text-btn-danger-label',
     hover: 'bg-btn-danger-hover',
     focus: 'bg-btn-danger-active outline-3 outline-(--border-color-btn-danger)',
     interactive: 'hover:bg-btn-danger-hover active:bg-btn-danger-active focus-visible:bg-btn-danger-active focus-visible:outline-3 focus-visible:outline-(--border-color-btn-danger)',
@@ -76,8 +76,14 @@ const link: Look = {
   interactive: 'hover:bg-btn-secondary focus-visible:outline-3 focus-visible:outline-(--border-color-focus)',
 };
 
-// Figma uses the same light fill for every disabled variant
-const disabledLook = 'bg-btn-primary-light text-btn-primary cursor-not-allowed';
+// Disabled uses the color's light fill (outline and link use primary, as in Figma)
+const disabledLook: Record<ButtonColor, string> = {
+  primary: 'bg-btn-primary-light text-btn-primary',
+  info: 'bg-btn-info-light text-btn-info-label',
+  success: 'bg-btn-success-light text-btn-success-label',
+  warning: 'bg-btn-warning-light text-btn-warning-label',
+  danger: 'bg-btn-danger-light text-btn-danger-label',
+};
 
 const defaultIcon: Record<Exclude<ButtonIconPosition, 'none'>, IconName> = { left: 'add', right: 'chevron-right', only: 'upload' };
 
@@ -111,7 +117,7 @@ export function Button({
         iconPosition === 'none' ? 'gap-0' : 'gap-1',
         sizes[size],
         current === 'disabled'
-          ? disabledLook
+          ? cn('cursor-not-allowed', disabledLook[variant === 'outline' || variant === 'link' ? 'primary' : color])
           : cn(look.base, current === 'hover' && look.hover, current === 'focus' && look.focus, !state && look.interactive),
         className,
       )}
