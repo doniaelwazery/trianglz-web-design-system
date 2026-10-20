@@ -25,9 +25,9 @@
 | 1 | Tokens machine-readable | done 2026-10-20 |
 | 2 | Components code-shaped | done 2026-10-20 |
 | 3 | Export tokens | done 2026-10-20 |
-| 4 | Code Connect | waiting on codebase |
+| 4 | Code Connect | blocked: needs Figma Organization/Enterprise plan |
 | 5 | DESIGN.md | done 2026-10-20 (4 confirm items open) |
-| 6 | Test + sync | waiting on codebase |
+| 6 | Test + sync | done 2026-10-20 (Logo swap pending Upload Field publish) |
 
 ## Step 1 — Tokens (done 2026-10-20)
 
@@ -188,3 +188,6 @@ Screen: "add New Project" — https://www.figma.com/design/G8OLBUp6OrEyrMBkqNUwQ
 - Measured vs Figma: card 24/16/8, fields 68 tall, title 36 lh, back link 136×32, Save 59×36 match; Cancel +5px, Description −2px
 - Fixed during test: xs Button icons 12px (Figma), `white` → `base-white` (Tailwind palette removed; added to DESIGN.md)
 - Open: Logo still ensido in Figma (Upload Field not in library); Page Title color is ensido #171717; xs text style has 0.2px tracking with no token
+
+## Sync routine (approved 2026-10-20)
+Saved in DESIGN.md section 8: variable change → code syntax + tokens.json + `npm run tokens:build` + PR; component change → React component (same props) + gallery + DESIGN.md + publish library + PR; rule change → DESIGN.md PR reviewed by designer; release → tokens:build, tsc, build pass + gallery check in Light/Dark.

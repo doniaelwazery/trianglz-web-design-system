@@ -149,3 +149,15 @@ Reuse these before building anything new. They live in `src/components` (`import
 8. Don't use `error` and `danger` interchangeably: `danger` is a component variant, `error` is a state and its tokens.
 9. Don't write per-component dark-mode styles; the theme switches tokens.
 10. Don't add responsive font-size or spacing overrides; the tokens already change per breakpoint.
+
+## 8. Keeping in sync
+
+| Change in Figma | What to do |
+|---|---|
+| Variable (color, spacing, type) | Set its WEB code syntax (Tailwind namespace), update `tokens/tokens.json`, run `npm run tokens:build` (must pass), PR listing affected components |
+| Component (new, renamed prop, new variant) | Update the React component with the same prop names, add it to the gallery and to section 5, publish the Figma library, PR |
+| Rule (usage, accessibility) | PR to this file, reviewed by the designer |
+| Before a release | `npm run tokens:build`, `npx tsc`, `npx vite build` pass; check the gallery in Light and Dark |
+
+Re-sync prompt for Claude:
+> Variables changed in Figma https://www.figma.com/design/J5nMmdVjcukSUhQXq0Oce7. Compare them to tokens/tokens.json, show me what's added, renamed, or changed, check the WEB code syntax, then regenerate the token files and list every component affected.
